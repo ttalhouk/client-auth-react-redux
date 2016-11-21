@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 
 
-class Signin extends Component {
+class Signup extends Component {
   handleFormSubmit({ email, password }) {
     // Need to do something to log user in
     this.props.signinUser({ email, password });
@@ -20,7 +20,7 @@ class Signin extends Component {
   }
 
   render() {
-    const { handleSubmit, fields: { email, password }} = this.props;
+    const { handleSubmit, fields: { email, password, passwordConfirm }} = this.props;
 
     return (
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
@@ -32,6 +32,10 @@ class Signin extends Component {
           <label>Password:</label>
           <input {...password} type="password" className="form-control" />
         </fieldset>
+        <fieldset className="form-group">
+          <label>Password Confirmation:</label>
+          <input {...passwordConfirm} type="password" className="form-control" />
+        </fieldset>
         {this.renderAlert()}
         <button action="submit" className="btn btn-primary">Sign in</button>
       </form>
@@ -39,23 +43,6 @@ class Signin extends Component {
   }
 }
 
-// using redux form v6
-    // return (
-    //   <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-    //     <fieldset className="form-group">
-    //       <label>Email:</label>
-    //       <Field name="email" component="input" className="form-control" />
-    //     </fieldset>
-    //     <fieldset className="form-group">
-    //       <label>Password:</label>
-    //       <Field name="password" component="input" type="password" className="form-control" />
-    //     </fieldset>
-    //     {this.renderAlert()}
-    //     <button action="submit" className="btn btn-primary">Sign In</button>
-    //   </form>
-    // );
-//   }
-// }
 
 function mapStateToProps(state) {
   return {
@@ -64,6 +51,6 @@ function mapStateToProps(state) {
 }
 
 export default reduxForm({
-  form: 'signin',
-  fields: ['email', 'password']
-}, mapStateToProps, actions)(Signin);
+  form: 'signup',
+  fields: ['email', 'password', 'passwordConfirm']
+}, mapStateToProps, actions)(Signup);
