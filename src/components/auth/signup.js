@@ -77,6 +77,5 @@ function validate(formProps) {
 export default reduxForm({
   form: 'signup',
   fields: ['email', 'password', 'passwordConfirm'],
-  validate: valadate
-
+  validate: validate
 }, mapStateToProps, actions)(Signup);
